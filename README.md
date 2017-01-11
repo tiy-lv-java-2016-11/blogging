@@ -1,5 +1,7 @@
 # Bloggy Blog
 
+![blog-dispair](blogging-despair-poster.jpg)
+
 ## Description
 We are finally going to write and deploy a blog.  For this we are going to be using a template to make our site look much nicer than we might be able to manage
 in the time we are given.
