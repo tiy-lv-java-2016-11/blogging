@@ -67,7 +67,7 @@ Do one of the following:
 * Create api versions of all of the endpoints for public consumption
 
 ## Nightmare Mode
-* Use Travis CI to deploy code to herou automatically
+* Use Travis CI to deploy code to Heroku automatically
 * Convert the front end to use only AJAX and hit the back end api
 
 ## Resources
