@@ -19,13 +19,12 @@ import javax.validation.Valid;
 @Controller
 public class AuthenticationController {
     private static final String SESSION_USER_ID = "userId";
-//    public static final Logger log = LoggerFactory.getLogger(AuthenticationController.class);
 
     @Autowired
     UserRepository userRepo;
 
     @RequestMapping(path = "/login", method = RequestMethod.POST)
-    public String login(@RequestBody LoginCommand command, HttpSession session, RedirectAttributes redAtt) throws PasswordStorage.CannotPerformOperationException, PasswordStorage.InvalidHashException {
+    public String login(LoginCommand command, HttpSession session, RedirectAttributes redAtt) throws PasswordStorage.CannotPerformOperationException, PasswordStorage.InvalidHashException {
         String message = "";
         User user = userRepo.findFirstByUsername(command.getUsername());
         if (user == null){
@@ -39,12 +38,12 @@ public class AuthenticationController {
                 session.setAttribute(SESSION_USER_ID, user.getId());
             }
         }
-        redAtt.addAttribute("message", message);
+        redAtt.addFlashAttribute("message", message);
         return "redirect:/";
     }
 
     @RequestMapping(path = "/register", method = RequestMethod.POST)
-    public String register(@Valid @RequestBody LoginCommand command, HttpSession session, RedirectAttributes redAtt){
+    public String register(LoginCommand command, HttpSession session, RedirectAttributes redAtt){
         String message = "";
         User user = userRepo.findFirstByUsername(command.getUsername());
         if (user != null){
@@ -55,7 +54,7 @@ public class AuthenticationController {
             session.setAttribute(SESSION_USER_ID, user.getId());
             message = "Registration successful.";
         }
-        redAtt.addAttribute("message", message);
+        redAtt.addFlashAttribute("message", message);
         return "redirect:/";
     }
 

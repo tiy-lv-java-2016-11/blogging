@@ -21,7 +21,7 @@ import java.util.List;
 
 @Controller
 public class EntryController {
-    private static final String SESSION_USER_ID = "userId";
+    public static final String SESSION_USER_ID = "userId";
 
     @Autowired
     UserRepository userRepo;
@@ -39,7 +39,7 @@ public class EntryController {
         return "index";
     }
 
-    @RequestMapping(path = "/id={id}", method = RequestMethod.GET)
+    @RequestMapping(path = "/entry", method = RequestMethod.GET)
     public String getOneEntry(Model model, int id){
         Entry entry = entryRepo.findOne(id);
         List<Comment> comments = commentRepo.findByEntry(entry);
@@ -49,24 +49,24 @@ public class EntryController {
     }
 
     @RequestMapping(path = "/create-entry", method = RequestMethod.POST)
-    public String createEntry(@Valid @RequestBody EntryCommand command, HttpSession session){
+    public String createEntry(EntryCommand command, HttpSession session){
         User user = userRepo.findOne((int)session.getAttribute(SESSION_USER_ID));
         if (user != null){
             Entry entry = new Entry(command.getTitle(), command.getSnippet(), command.getPost(), user);
             entryRepo.save(entry);
         }
-        return "redirect:/";
+        return "redirect:/entry";
     }
 
     @RequestMapping(path = "/create-comment", method = RequestMethod.POST)
-    public String createComment(@Valid @RequestBody CommentCommand command, int entryId, HttpSession session){
+    public String createComment(CommentCommand command, int entryId, HttpSession session){
         User user = userRepo.findOne((int)session.getAttribute(SESSION_USER_ID));
         Entry entry = entryRepo.findOne(entryId);
         if (user != null){
             Comment comment = new Comment(command.getContent(), entry, user);
             commentRepo.save(comment);
         }
-        return "redirect:/";
+        return "redirect:/entry";
     }
 
 }
