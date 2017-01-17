@@ -42,7 +42,7 @@ public class EntryController {
         return "entry-list";
     }
 
-    @RequestMapping(path = "entry-details/{id}", method = RequestMethod.GET)
+    @RequestMapping(path = "/entry-details/{id}", method = RequestMethod.GET)
     public String getDetails(Model model, @PathVariable int id){
         Entry entry = entryRepository.findOne(id);
 

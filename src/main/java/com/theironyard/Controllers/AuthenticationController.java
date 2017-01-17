@@ -28,7 +28,7 @@ public class AuthenticationController {
     @RequestMapping(path = "/login", method = RequestMethod.GET)
     public String loginPage(HttpSession session){
         if(session.getAttribute(CURRENT_USER) == null){
-            return "/login";
+            return "login";
         }
 
         return "login";
