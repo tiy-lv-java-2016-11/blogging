@@ -62,7 +62,7 @@ public class AuthenticationControllerTests {
                         .param("password", password)
         ).andExpect(MockMvcResultMatchers.status().is3xxRedirection()
         ).andExpect(flash().attribute("message", "Invalid Username/Password.")
-        ).andExpect(redirectedUrl("/"));
+        ).andExpect(redirectedUrl("/login"));
     }
 
     @Test
@@ -73,7 +73,7 @@ public class AuthenticationControllerTests {
                         .param("password", password+"2")
         ).andExpect(MockMvcResultMatchers.status().is3xxRedirection()
         ).andExpect(flash().attribute("message", "Invalid Username/Password.")
-        ).andExpect(redirectedUrl("/"));
+        ).andExpect(redirectedUrl("/login"));
     }
 
     @Test
@@ -98,6 +98,6 @@ public class AuthenticationControllerTests {
                         .param("password", password)
         ).andExpect(MockMvcResultMatchers.status().is3xxRedirection()
         ).andExpect(flash().attribute("message", "That username is taken.")
-        ).andExpect(redirectedUrl("/"));
+        ).andExpect(redirectedUrl("/register"));
     }
 }

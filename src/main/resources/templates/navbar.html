@@ -1,0 +1,39 @@
+<div class="navbar navbar-material-blog navbar-danger navbar-absolute-top">
+
+    <div class="navbar-image" style="background-image: url('static/img/photography/unsplash-1.jpg');background-position: center 40%;"></div>
+
+    <div class="navbar-wrapper container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/"><i class="material-icons">&#xE871;</i>Blogger</a>
+        </div>
+        <div class="navbar-collapse collapse navbar-responsive-collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="/create-entry">Create New Post</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                {{#user}}
+                <li>
+                    <form action="/logout" method="post">
+                        <button type="submit" class="btn btn-default btn-raised">Logout</button>
+                    </form>
+                </li>
+                {{/user}}
+                {{^user}}
+                <li>
+                    <form style="display: inline" action="/login" method="get">
+                        <button type="submit" class="btn btn-default btn-raised">Login</button>
+                    </form>
+                    <form style="display: inline" action="/register" method="get">
+                        <button type="submit" class="btn btn-default btn-raised">Register</button>
+                    </form>
+                </li>
+                {{/user}}
+            </ul>
+        </div>
+    </div>
+</div>

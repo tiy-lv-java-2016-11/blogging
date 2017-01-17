@@ -85,6 +85,7 @@ public class EntryControllerTests {
 
         mockMvc.perform(
                 MockMvcRequestBuilders.get("/")
+                    .sessionAttr("currentUsername", user.getUsername())
         ).andExpect(MockMvcResultMatchers.status().is2xxSuccessful()
         ).andExpect(model().attribute("entries", hasSize(2))
         ).andExpect(view().name("index"));
@@ -94,8 +95,7 @@ public class EntryControllerTests {
     public void testGetOneEntry() throws Exception {
 
         mockMvc.perform(
-                MockMvcRequestBuilders.get("/entry")
-                .param("id", String.valueOf(entry1.getId()))
+                MockMvcRequestBuilders.get("/entry/"+entry1.getId())
         ).andExpect(MockMvcResultMatchers.status().is2xxSuccessful()
         ).andExpect(model().attribute("entry", hasProperty("title", is(entry1.getTitle())))
         ).andExpect(model().attribute("comments", hasSize(2))
@@ -113,7 +113,7 @@ public class EntryControllerTests {
                     .param("title", title)
                     .param("snippet", snippet)
                     .param("post", post)
-                    .sessionAttr("userId", user.getId())
+                    .sessionAttr("currentUsername", user.getUsername())
         ).andExpect(MockMvcResultMatchers.status().is3xxRedirection());
 
         Entry savedEntry = entryRepo.findByTitle(title);
@@ -134,7 +134,7 @@ public class EntryControllerTests {
                 MockMvcRequestBuilders.post("/create-comment")
                     .param("content", content)
                     .param("entryId", String.valueOf(entry1.getId()))
-                    .sessionAttr("userId", user.getId())
+                    .sessionAttr("currentUsername", user.getUsername())
         ).andExpect(MockMvcResultMatchers.status().is3xxRedirection());
 
         Comment savedComment = commentRepo.findByContent(content);

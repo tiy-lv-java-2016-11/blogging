@@ -1,10 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    {{> head}}
 </head>
+
 <body>
+
+{{> navbar}}
+
+<div class="container blog-content">
+
+    <div class="row">
+
+        <div class="col-sm-12 blog-main">
+
+            <div class="row">
+                <div class="col-sm-6">
+                    {{#entries}}
+                    <section class="blog-post">
+                        <div class="panel panel-default">
+                            <img src="img/photography/unsplash-2.jpg" class="img-responsive" />
+                            <div class="panel-body">
+                                <div class="blog-post-meta">
+                                    <p class="blog-post-date pull-right">{{createdAt}}</p>
+                                </div>
+                                <div class="blog-post-content">
+                                    <a href="/entry/{{id}}">
+                                        <h2 class="blog-post-title">{{title}}</h2>
+                                    </a>
+                                    <p>{{snippet}}</p>
+                                    <a class="btn btn-info" href="/entry/{{id}}">Read more</a>
+                                    <a class="blog-post-share pull-right" href="#">
+                                        <i class="material-icons">&#xE80D;</i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </section><!-- /.blog-post -->
+                    {{/entries}}
+                </div>
+            </div>
+
+            <nav>
+                <ul class="pager">
+                    <li><a class="withripple" href="#">Previous</a></li>
+                    <li><a class="withripple" href="#">Next</a></li>
+                </ul>
+            </nav>
+
+        </div><!-- /.blog-main -->
+
+    </div><!-- /.row -->
+
+</div><!-- /.container -->
+
+{{> footer}}
 
 </body>
 </html>
